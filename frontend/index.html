@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-buttons="solid" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Review CIE question papers against course outcomes and covered syllabus topics." />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta name="theme-color" content="#f7f7f5" />
+    <script>
+      try {
+        if (localStorage.getItem('scrutiny-theme') === 'dark') {
+          document.documentElement.dataset.theme = 'dark';
+          document.querySelector('meta[name="theme-color"]').content = '#11151d';
+        }
+      } catch {
+        // The light theme also works when browser storage is unavailable.
+      }
+    </script>
+    <meta property="og:title" content="Scrutiny desk" />
+    <meta property="og:description" content="Review CIE question papers against course outcomes and covered syllabus topics." />
+    <title>Scrutiny desk · CIE question paper review</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

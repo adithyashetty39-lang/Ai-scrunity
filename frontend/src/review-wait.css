@@ -1,0 +1,77 @@
+.review-wait {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  min-height: 228px;
+  padding: clamp(14px, 3vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--p-bg);
+}
+
+.review-wait-copy h3 { margin: 0 0 8px; }
+.review-wait-copy p { margin: 0; }
+.review-wait-copy button { margin-top: 12px; }
+
+.review-wait-art {
+  position: relative;
+  overflow: clip;
+  display: grid;
+  place-items: center;
+  min-height: clamp(128px, 19vw, 186px);
+  border-radius: var(--control-radius);
+  background:
+    radial-gradient(ellipse at 80% 0, #fcf5e7, transparent 69%),
+    linear-gradient(152deg, #eef3f6, #f9f9f6);
+}
+
+:root[data-theme="dark"] .review-wait-art {
+  background:
+    radial-gradient(ellipse at 70% 0%, #3b3639, transparent 70%),
+    linear-gradient(152deg, #24364e, #172131);
+}
+
+.review-sheet {
+  width: 94px;
+  height: 116px;
+  transform: translateY(15px) rotate(-8deg);
+  border: 1px solid #cbd3d8;
+  border-radius: 5px;
+  background:
+    linear-gradient(#c79eaa, #c79eaa) 14px 19px / 39px 3px no-repeat,
+    repeating-linear-gradient(to bottom, #dddedd 0 1px, transparent 1px 11px) 14px 36px / 62px 54px no-repeat,
+    #fff;
+  box-shadow: 8px 11px 22px #25344216;
+}
+
+.review-wait-flight {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.review-wait-art[data-phase="playing"] .review-wait-flight { opacity: 1; }
+
+.review-wait-creature { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.review-wait-still {
+  position: absolute;
+  width: min(82%, 305px);
+  max-height: 100%;
+  height: auto;
+  object-fit: contain;
+  transform: translateY(-8px);
+  animation: review-wait-still-appear .28s ease-out both;
+}
+
+@keyframes review-wait-still-appear { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 660px) {
+  .review-wait { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-wait-flight { display: none; }
+  .review-wait-still { animation: none; }
+}

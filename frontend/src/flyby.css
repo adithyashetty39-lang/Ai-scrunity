@@ -1,0 +1,127 @@
+.site-header {
+  position: relative;
+}
+
+.site-header :is(.brand, .mode),
+.app .heading {
+  position: relative;
+  z-index: 2;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.flyby-trigger {
+  z-index: 2;
+  min-width: 120px;
+}
+
+.flyby-trigger span {
+  color: var(--accent-dark);
+}
+
+.flyby-sky {
+  --creature-width: clamp(168px, 25vw, 320px);
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: calc(var(--creature-width) * .63 + 12px);
+  overflow: clip;
+  pointer-events: none;
+}
+
+.flyby-sky[data-phase="loading"] {
+  opacity: 0;
+}
+
+.flyby-path {
+  position: absolute;
+  left: 0;
+  width: var(--creature-width);
+  transform: translateX(-100%);
+}
+
+.flyby-creature,
+.flyby-still {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.flyby-path::after {
+  content: "";
+  position: absolute;
+  inset: 12% -12% 10% 18%;
+  background: radial-gradient(ellipse at 71% 45%, #fff 0%, transparent 61%),
+    radial-gradient(ellipse at 48% 60%, #e4edf0 0%, transparent 63%);
+  filter: blur(10px);
+  opacity: 0;
+}
+
+.flyby-sky[data-phase="playing"] .flyby-path {
+  animation: airavata-crossing 5s linear both;
+}
+
+.flyby-sky[data-phase="playing"] .flyby-path::after {
+  animation: airavata-cloud 5s linear both;
+  animation-play-state: inherit;
+}
+
+.flyby-still {
+  position: absolute;
+  width: var(--creature-width);
+  inset-block-start: 10px;
+  inset-inline-end: var(--gutter);
+}
+
+@keyframes airavata-crossing {
+  0% { transform: translate3d(-100%, 7px, 0) scale(.91); opacity: 0; }
+  12% { opacity: 1; }
+  52% { transform: translate3d(calc(50vw - var(--creature-width) / 2), -4px, 0) scale(1); }
+  88% { opacity: 1; }
+  100% { transform: translate3d(99vw, -15px, 0) scale(.93); opacity: 0; }
+}
+
+@keyframes airavata-cloud {
+  0%, 76% { opacity: 0; }
+  87% { opacity: .7; }
+  100% { opacity: 0; }
+}
+
+.flyby-credit {
+  display: block;
+  margin-top: 7px;
+}
+
+.flyby-credit a {
+  color: inherit;
+  text-underline-offset: .17em;
+}
+
+.flyby-credit a:hover {
+  color: var(--accent-dark);
+}
+
+@media (max-width: 620px) {
+  .header-actions { gap: 12px; }
+  .flyby-trigger { min-width: 107px; padding-inline: 8px; }
+}
+
+@media (max-width: 480px) {
+  .header-actions { gap: 9px; }
+  .mode-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flyby-path { display: none; }
+}

@@ -1,0 +1,2 @@
+# Optional Windows-native OCR; unavailable elsewhere without another adapter.
+winocr==0.0.15; sys_platform == 'win32'
